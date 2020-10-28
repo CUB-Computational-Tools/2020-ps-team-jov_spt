@@ -45,5 +45,12 @@ In modern times, the increase in atmopsheric carbon dioxide has come from the bu
 The Paleocene-Eocene Thermal Maximum (PETM) is one of those times. The PETM happened around 55 million years ago (about 10 million years after a big meteroite impact made the dinosaurs go extinct). The PETM was first recognized after deep ocean bedrock cores recorded a big change in the carbon isotope values around this time. Over time, scientists have concluded that this time period (over a few thousand years) experienced high levels of atmospheric carbon dioxide and increased temperatures in the ocean and on land (McInerney & Wing, 2011). 
 
 #Modern-Day Carbon Dioxide and Sea Surface Temperature (SST)
+We're going to first investigate data sets that look at the level of carbon dioxide measured in the atmosphere (in parts per million) from the Global Monitoring Laboratory in Mauna Loa over time. We'll also be looking at modern data sets for Sea Surface Temperature (SST). 
+
+
+
+##Sources: 
+-McInerney, F. A., & Wing, S. L. (2011). The Paleocene-Eocene Thermal Maximum: a perturbation of carbon cycle, climate, and biosphere with implications for the future. Annual Review of Earth and Planetary Sciences, 39, 489-516.
+-NOAA Global Monitoring Laboratory, Mauna Loa):
 
 
