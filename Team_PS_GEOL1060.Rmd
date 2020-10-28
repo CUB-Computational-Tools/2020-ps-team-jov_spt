@@ -1,7 +1,7 @@
 ---
 title: "Team Problem Set"
 subtitle: "Ocean Acidification"
-author: "Juliana and Stephanie"
+author: "Stephanie and Juliana"
 date: "Last knitted `r format(Sys.Date(), '%d %b %Y')`"
 output:
   html_document: 
@@ -14,6 +14,7 @@ output:
 editor_options:
   chunk_output_type: inline
 ---
+
 
 ##Introduction
 Ocean acidification is one of the many impacts of climate change and increased atmospheric carbon dioxide ($CO^2$), and many modern studies have focused on changes in temperature or $CO^2$ on Earth over the last hundreds of years. However, scientists can also look to geologic records millions of years ago as a case study to understand what happened to ecosystems in the past that were also subject to large increases in atmospheric $CO2$ and temperature. In this activity, we'll look at data sets from a time known as the Paleocene-Eocene Thermal Maximum (PETM) and compare those data sets to modern data sets to see how changes in temperature and $CO2$ compare between the past and present. 
@@ -48,9 +49,36 @@ The Paleocene-Eocene Thermal Maximum (PETM) is one of those times. The PETM happ
 We're going to first investigate data sets that look at the level of carbon dioxide measured in the atmosphere (in parts per million) from the Global Monitoring Laboratory in Mauna Loa over time. We'll also be looking at modern data sets for Sea Surface Temperature (SST). 
 
 
+##Using Data Sets 
+We'll first load some computer programming libraries that will allow us to make our code do things like pull in data sets from a folder or make a plot
+```{r load libraries}
+library(tidyverse) #these are all different libraries that help the code do different things
+library(readxl)#the blue :library" part tells R that this is a library it should load and the black writing is the name of the specific library
+library(ggplot2)#this library, for example, helps us make plots of our data
+
+#notice that because there is a "#" symbol before all of the note text above, it's all just comments that don't affect the code!
+```
+
+Now, we'll load PETM data of estimated SST (degrees Celsius):
+```{r load data}
+PETM_data <- #we are making a new data set called "PETM_data" 
+  read_excel("data/FAKE_PETM_SST_data.xlsx") #we are reading in the excel file with our data (which is in the data folder)
+```
+
+Plot the estimated SST (degrees Celcius) data over time:
+```{r plot PETM data}
+SSTvAge <- #We create a new plot that's named "SSTvAge"
+ggplot(PETM_data, aes(x = Age, y = SST)) + #we call the function ggplot to input our data set and assign x and y variables
+geom_line(size = 0.5, color = 'red')+ #We define a red line to connect our data points
+labs(y = "SST (degrees C)", x = "Age (Ma)", title = "SST (degrees Celcius) vs Age (Ma) during the PETM" )+ #We give our graph labels
+theme_bw() #We make the background grid theme/color black and white 
+SSTvAge
+```
 
 ##Sources: 
 -McInerney, F. A., & Wing, S. L. (2011). The Paleocene-Eocene Thermal Maximum: a perturbation of carbon cycle, climate, and biosphere with implications for the future. Annual Review of Earth and Planetary Sciences, 39, 489-516.
--NOAA Global Monitoring Laboratory, Mauna Loa):
+-NOAA Global Monitoring Laboratory, Mauna Loa)
+-PETM data modified from Stokke, E. W., Jones, M. T., Tierney, J. E., Svensen, H. H., & Whiteside, J. H. (2020). Temperature changes across the Paleocene-Eocene Thermal Maximum–a new high-resolution TEX86 temperature record from the Eastern North Sea Basin. Earth and Planetary Science Letters, 544, 116388.
+
 
 
