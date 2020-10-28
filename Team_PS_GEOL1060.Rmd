@@ -70,7 +70,7 @@ Plot the estimated SST (degrees Celcius) data over time:
 SSTvAge <- #We create a new plot that's named "SSTvAge"
 ggplot(PETM_data, aes(x = Age, y = SST)) + #we call the function ggplot to input our data set and assign x and y variables
 geom_line(size = 0.5, color = 'red')+ #We define a red line to connect our data points
-labs(y = "SST (degrees C)", x = "Age (Ma)", title = "SST (degrees Celcius) vs Age (Ma) during the PETM" )+ #We give our graph labels
+labs(y = "SST (degrees C)", x = "Age (Ma)", title = "SST (degrees Celcius) vs Age (Ma) during the PETM from Stokke et al. (2020)" )+ #We give our graph labels
 theme_bw() #We make the background grid theme/color black and white 
 SSTvAge
 ```
