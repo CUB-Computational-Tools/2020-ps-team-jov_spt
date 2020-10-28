@@ -1,0 +1,67 @@
+---
+title: "Ocean Acidification Problem Set"
+author: "Juliana Olsen-Valdez & Stephanie Paza-Torres"
+date: "Last knitted `r format(Sys.Date(), '%d %b %Y')`"
+output:
+  html_document: 
+    df_print: paged
+    number_sections: yes
+    toc: yes
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+editor_options:
+  chunk_output_type: inline
+---
+
+> Click into a code cell (the gray blocks below) to select or edit it. To run a selected code cell, hit `Ctrl`+`Shift`+`Enter` (Windows & Linux) / `Command`+`Shift`+`Enter` (MacOS). Make sure that each code cell runs successfully before you move on to the next one. There is also a small green 'play' button in the corner that wil run the code cell for you.
+
+<p>&nbsp;</p>
+# ***Ocean Acidification***
+<p>&nbsp;</p>
+
+## Learning goals
+
+After doing this lesson you should be able to:
+
+1.  
+
+## Pre-requisites
+
+1. 
+
+<p>&nbsp;</p>
+
+## Background
+
+> To setup our lesson and use R code we first need to load some packages. *R packages* are collections of functions and data sets developed by the community. They improve the existing base fuctionalities of R and expand what you can achieve with your code. 
+
+But what is a function?
+
+> A *function* is a conjunction of code that achieves a specific task. This code can be 'called' using the function's given name. What the function ultimately does is take in data and return a result based on that function's 'inner' code. 
+
+```{r Loading Packages}
+# SPT: I will add to this later based on what we need 
+
+# The library() function loads each package. You need to do this so R can find the functions you need from a certain package. What's inside the parenthesis is the name of the package we are loading. Once the package loads all the different functions associated with it are usable. 
+
+```
+
+
+LateX math example
+$$
+\begin{align}
+\dot{x} & = \sigma(y-x) \\
+\dot{y} & = \rho x - y - xz \\
+\dot{z} & = -\beta z + xy
+\end{align}
+$$
+
+<p>&nbsp;</p>
+___________________________________________________________________________________________________________
+
+## Questions
+
+remember to add the markdown space for them to write their own code in.
+
+1. 
