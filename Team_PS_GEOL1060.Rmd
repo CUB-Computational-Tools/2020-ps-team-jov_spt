@@ -16,7 +16,7 @@ editor_options:
 ---
 
 ##Introduction
-Ocean acidification is one of the many impacts of climate change and increasing atmospheric carbon dioxide ($CO^2$), and many modern studies have focused on changes in temperature or $CO^2$ on Earth over the last hundreds of years. However, scientists can also look to really old geologic records millions of years ago as a case study to understand what happened to ecosystems in the past that were also subject to large increases in atmospheric $CO2$ and temperature. In this activity, we'll look at data sets from a time known as the Paleocene-Eocene Thermal Maximum (PETM) and compare those data sets to modern data sets to see how changes in temperature and $CO2$ compare between the past and present. 
+Ocean acidification is one of the many impacts of climate change and increased atmospheric carbon dioxide ($CO^2$), and many modern studies have focused on changes in temperature or $CO^2$ on Earth over the last hundreds of years. However, scientists can also look to geologic records millions of years ago as a case study to understand what happened to ecosystems in the past that were also subject to large increases in atmospheric $CO2$ and temperature. In this activity, we'll look at data sets from a time known as the Paleocene-Eocene Thermal Maximum (PETM) and compare those data sets to modern data sets to see how changes in temperature and $CO2$ compare between the past and present. 
 
 In this activity you'll also use and manipulate computer programming code to load data sets and make plots. All code will include comments (text that follows the # symbol) that explains what each line of code **says** and what each line of code **does**. Computer Programming can be somewhat intimidating, but this activity will walk through all parts of the code along the way.
 
@@ -32,33 +32,18 @@ Prior to completing this Problem Set, it is expected that students:
 -Have opened the binderlink on the Canvas page and let the link load so they will be ready to participate when the activity begins
 -Have completed the supplemental readings on Ocean Acidification from the Canvas page and heard the lecture from Dr. Crump or Prof. Miller. 
 
-##Background and Defining Terms
-**Ocean acidification** refers to the process by which *increasing levels of carbon dioxide* ($CO_2$) correlate to a *decrease in the pH of the ocean*. The earth has a natural process by which is sequesters carbon dioxide (in rocks, for example) and releases carbon dioxide (by trees, for example). However, anthropogenic ("human-caused") behavior has resulted in an unnatural increase in the amount of carbon dioxide in the atmosphere, which also leads to higher levels of $CO_2$ in the oceans. 
 
-But, what's "pH" again? Well, acidity is controlled by how many $H^+$ ions are in a solution (acids release $H^+$ ions) and the pH scale is used to describe the *concentration* of $H^+$ ions, which is represented by the term $[H^+]$. A solution is said to be acidic when the pH is below 7, and basic when the pH is above 7. Even a small change on the pH scale indicates a large change in H+ concentration of a solution (like the ocean); this is due to the log relationship between pH and $H^+$.
+##Background and Defining Terms: 
+#Ocean Acidification and Atmospheric Carbon Dioxide
+**Ocean acidification** refers to the process by which *increasing levels of carbon dioxide* ($CO_2$) correlate to a *decrease in the pH of the ocean*. The earth has a natural process by which it sequesters carbon dioxide (in rocks, for example) and releases carbon dioxide (through processes like decomposition). However, anthropogenic ("human-caused") behavior has resulted in an unnatural increase in the amount of carbon dioxide in the atmosphere, which also leads to higher levels of $CO_2$ in the oceans. 
 
-$$[H^+]=10^{-pH}$$
-Ocean acidification is actually a misleading name for the process by which the oceans become more "acidic." That's because the increase in atmospheric $CO_2$ in the oceans has changed the ocean from alkaline (with a pH above 7) to *less alkaline* where the pH is still above 7 (so not acidic) but lower than it was before.
+As the supplemental readings explained, when levels of carbon dioxide increase in the atmosphere, the chemistry of the oceans change. That atmospheric carbon dioxide mixes with sea water to create carbonic acid. Increased  carbonic acid in the ocean makes the ocean more acidic and contributes to breaking down corals and organism shells through a chain of chemical reactions. As more and more $CO2$ is added into the atmopshere, this process continues to happen and more and more organisms and ecosystems can be negatively affected. 
 
-Now that we've defined some important terms and described **how** ocean acidification works, let's look at some chemical reactions that break down **why** it occurs. When looking at these reactions, remember that all of these are forward and reverse reactions.
+In modern times, the increase in atmopsheric carbon dioxide has come from the burning of fossil fuels (a lot of burried carbon), but there have been other times in the geologic past when large amounts of carbon dioxide were released into the atmosphere. 
 
-The first chemical reaction describes what happens when carbon dioxide from the atmosphere mixes with seawater to form carbonic acid. Anthropogenic climate change has lead to an increase in the amount of carbon dioxide in the atmosphere, which pushes this equation to the right. 
-$$1)\ CO_2 + H_2O \longleftrightarrow\  H_2CO_3^{2-}$$
-The second chemical reaction describes how carbonic acid breaks down to form hydrogen $(H^+)$ ions and bicarbonate $(HCO_3^{-})$. This increases the concentration of $(H^+)$ ions in the water, which would lower the pH (hence, ocean acidification!).
-$$2)\ H_2CO_3^{2-} \longleftrightarrow\ H^+ + HCO_3^{-}$$
-The third chemical reaction describes how bicarbonate breaks down to form $H^+$ ions and carbonate $(CO_3^{2-})$. This reaction is important because we'll be thinking about it in **reverse**. When there is a high concentration of $H^+$ ions in the ocean, they bond to carbonate to form more bicarbonate, leaving less carbonate in the water. 
-$$3)\ HCO_3^{-} \longleftrightarrow\  H^+ + CO_3^{2-}$$
-The fourth chemical reaction describes the process of ***calcification**. Calcifying organisms use calcium $(Ca^{2+})$ and carbonate $(CO_3^{2-})$ suspended in the ocean to form their shells, skeletons, and corals. Carbonate in the ocean comes from the weathering of rocks and the breakdown of old carbonate shells or skeletons, but these processes take time. This forward reaction can only occur if carbonate is saturated in the water and the reverse reaction can occur if there are a lot of $H^+$ ions in the water since hydrogen can better bond to carbonate compared to calcium.
-$$4)\ Ca^{2+} + CO_3^{2-} \longleftrightarrow\  CaCO_3$$
-Now that we've broken down our four reactions let's think about why they explain the process behind ocean acidification, and how its detrimental to the ocean. 
-1) When atmospheric carbon dioxide increases in the atmopshere, it reacts with seawater to form carbonic acid (Reaction 1)
-2) Carbonic acid breaks down to hydrogen ions and bicarbonate, increasing the $[H^+]$ and lowering pH, which can affect plants and animals in the ocean that are sensitive to changes in pH (Reaction 2)
-3) But wait, there's more; with a greater concentration of hydrogen in the water, any suspended carbonate bonds with hydrogen to form more bicarbonate (remember, this is because hydrogen is better at bonding with carbonate than calcium) (reverse Reaction 3)
-4) Uh oh! Calcifying organisms that use carbonate to make their shells (Reaction 4) have a harder time or can't find any carbonate in the water since it's reacted with hydrogen to form bicarbonate!
-5) But it gets worse; when the concentration of hydrogen in the water is so large and much of the carbonate has been reacted to form bicarbonate, the carbonate from organism shells or corals starts to break down and react with the hydrogen, leading to the corrosion of coral skeletons and shells (Reverse Reaction 4). 
+#Paleocene-Eocene Thermal Maximum
+The Paleocene-Eocene Thermal Maximum (PETM) is one of those times. The PETM happened around 55 million years ago (about 10 million years after a big meteroite impact made the dinosaurs go extinct). The PETM was first recognized after deep ocean bedrock cores recorded a big change in the carbon isotope values around this time. Over time, scientists have concluded that this time period (over a few thousand years) experienced high levels of atmospheric carbon dioxide and increased temperatures in the ocean and on land (McInerney & Wing, 2011). 
+
+#Modern-Day Carbon Dioxide and Sea Surface Temperature (SST)
 
 
-
-
-
-> Click into a code cell (the gray blocks below) to select or edit it. To run a selected code cell, hit `Ctrl`+`Shift`+`Enter` (Windows & Linux) / `Command`+`Shift`+`Enter` (MacOS). Make sure that each code cell runs successfully before you move on to the next one.
