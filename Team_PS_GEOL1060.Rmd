@@ -1,0 +1,66 @@
+---
+title: "Ocean Acidification Problem Set"
+author: "Juliana Olsen-Valdez & Stephanie Plaza-Torres"
+date: "Last knitted `r format(Sys.Date(), '%d %b %Y')`"
+output:
+  html_document: 
+    df_print: paged
+    number_sections: yes
+    toc: yes
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+editor_options:
+  chunk_output_type: inline
+---
+
+> Click into a code cell (the gray blocks below) to select or edit it. To run a selected code cell, hit `Ctrl`+`Shift`+`Enter` (Windows & Linux) / `Command`+`Shift`+`Enter` (MacOS). Make sure that each code cell runs successfully before you move on to the next one. There is also a small green 'play' button in the corner that wil run the code cell for you.
+
+<p>&nbsp;</p>
+# ***Ocean Acidification***
+<p>&nbsp;</p>
+
+##Using Data Sets 
+
+> We'll first load some R packages that will allow us to make our code do things like pull in data sets from a folder or make a plot. *R packages* are collections of functions and data sets developed by the community. They improve the existing base fuctionalities of R and expand what you can achieve with your code. 
+But what is a function?
+
+> A *function* is a conjunction of code that achieves a specific task. This code can be 'called' using the function's given name. What the function ultimately does is take in data and return a result based on that function's 'inner' code. 
+
+```{r load packages}
+# The library() function loads each package. You need to do this so R can find the functions you need from a certain package. Once the package loads all the different functions associated with it are usable. 
+library(tidyverse) #these are all different libraries that help the code do different things
+library(readxl)#the blue "library" part tells R that this is a package it should load and the black writing is the name of the specific package(in this case "readxl" which helps us read Excel files into R)
+library(ggplot2)#this library, for example, helps us make plots of our data. 
+#notice that because there is a "#" symbol before all of the note text above, it's all just comments that don't affect the code!
+```
+
+###Modern $CO_2$ Concentration
+
+At Mauna Loa, NOAA has data looking at the parts per million concentration of $CO_2$
+
+
+Now, we'll load PETM data of estimated SST (degrees Celsius):
+```{r load data}
+PETM_data <- #we are making a new data set called "PETM_data" 
+  read_excel("data/FAKE_PETM_SST_data.xlsx") #we are reading in the excel file with our data (which is in the data folder)
+```
+
+Plot the estimated SST (degrees Celcius) data over time:
+```{r plot PETM data}
+SSTvAge <- #We create a new plot that's named "SSTvAge"
+ggplot(PETM_data, aes(x = Age, y = SST)) + #we call the function ggplot to input our data set and assign x and y variables
+geom_line(size = 0.5, color = 'red')+ #We define a red line to connect our data points
+labs(y = "SST (degrees C)", x = "Age (Ma)", title = "SST (degrees Celcius) vs Age (Ma) during the PETM from Stokke et al. (2020)" )+ #We give our graph labels
+theme_bw() #We make the background grid theme/color black and white 
+SSTvAge
+```
+
+##Sources: 
+- McInerney, F. A., & Wing, S. L. (2011). The Paleocene-Eocene Thermal Maximum: a perturbation of carbon cycle, climate, and biosphere with implications for the future. Annual Review of Earth and Planetary Sciences, 39, 489-516.
+- NOAA Global Monitoring Laboratory, Mauna Loa
+- NOAA Extended Reconstructed Sea Surface Temperature (ERSST)
+- PETM data modified from Stokke, E. W., Jones, M. T., Tierney, J. E., Svensen, H. H., & Whiteside, J. H. (2020). Temperature changes across the Paleocene-Eocene Thermal Maximum–a new high-resolution TEX86 temperature record from the Eastern North Sea Basin. Earth and Planetary Science Letters, 544, 116388.
+
+
+
