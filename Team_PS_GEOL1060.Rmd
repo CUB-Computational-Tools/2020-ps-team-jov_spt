@@ -20,6 +20,41 @@ editor_options:
 # ***Ocean Acidification***
 <p>&nbsp;</p>
 
+## Introduction
+Ocean acidification is one of the many impacts of climate change and increased atmospheric carbon dioxide ($CO_2$), and many modern studies have focused on changes in temperature or $CO_2$ on Earth over the last hundreds of years. However, scientists can also look to geologic records millions of years ago as a case study to understand what happened to ecosystems in the past that were also subject to large increases in atmospheric $CO_2$ and temperature. In this activity, we'll look at data sets from a time known as the Paleocene-Eocene Thermal Maximum (PETM) and compare those data sets to modern data to see how changes in temperature and $CO_2$ compare between the past and present. 
+
+In this activity you'll also use and manipulate computer programming code in **R** to load data sets and make plots. All code will include comments (text that follows the # symbol) that explains what each line of code **says** and what each line of code **does**. Computer programming can be somewhat intimidating, but this activity will walk through all parts of the code along the way. 
+
+## Learning Goals
+By the end of this activity, you will be able to:
+1) Understand the process of ocean acidification and how it's related to changes in atmospheric $CO_2$ and temperature. 
+2) Interpret plots from PETM and modern data for temperature and/or atmospheric $CO_2$.
+3) Edit code to upload a data file into R and change certain characteristics of data plots.
+4) Gain a sense for the utility in using computer programming to investigate data sets and scientific problems.
+
+## Prerequisites
+Prior to completing this Problem Set, it is expected that students: 
+- Have opened the Binder link on the Canvas page and let the link load so they will be ready to participate when the activity begins.
+- Have completed the supplemental readings on Ocean Acidification from the Canvas page and heard the lecture from Dr. Crump or Prof. Miller. 
+
+
+## Background and Defining Terms: 
+### Ocean Acidification and Atmospheric Carbon Dioxide
+
+**Ocean acidification** refers to the process by which *increasing levels of carbon dioxide* ($CO_2$) correlate to a *decrease in the pH of the ocean*. The Earth has a natural process by which it sequesters carbon dioxide (in rocks, for example) and releases carbon dioxide (through processes like decomposition). However, anthropogenic ("human-caused") behavior has resulted in an unnatural increase in the amount of carbon dioxide in the atmosphere, which also leads to higher levels of $CO_2$ in the oceans. 
+
+As the supplemental readings explained, when levels of carbon dioxide increase in the atmosphere, the chemistry of the oceans change. That atmospheric carbon dioxide mixes with sea water to create carbonic acid. Increased  carbonic acid in the ocean makes the ocean more acidic and contributes to breaking down corals and organism's carbonate shells through a chain of chemical reactions. As more and more $CO_2$ is added into the atmopshere, this process continues to happen and more and more organisms and ecosystems can be negatively affected. 
+
+In modern times, the increase in atmopsheric carbon dioxide has come from the burning of fossil fuels (a lot of buried carbon), but there have been other times in the geologic past when large amounts of carbon dioxide were released into the atmosphere. 
+
+### Paleocene-Eocene Thermal Maximum
+The Paleocene-Eocene Thermal Maximum (PETM) is one of those times. The PETM happened around 55 million years ago (about 10 million years after a big meteroite impact made the dinosaurs go extinct). The PETM was first recognized after deep ocean bedrock cores recorded a big change in the carbon isotope values around this time. Over time, scientists have concluded that this time period (over a few thousand years) experienced high levels of atmospheric carbon dioxide and increased temperatures in the ocean and on land (McInerney & Wing, 2011). Moreover, the PETM triggered mass ectinctions of deep-sea organisms, showing that these drastic changes in carbon dioxide and temperatures could impact the biosphere.
+
+### Modern-Day Carbon Dioxide and Sea Surface Temperature (SST)
+We're going to first investigate data sets that look at the level of carbon dioxide measured in the atmosphere (in parts per million) from the [Global Monitoring Laboratory in Mauna Loa](https://www.esrl.noaa.gov/gmd/ccgg/trends/monthly.html) over time. We'll also be looking at modern data sets for [Sea Surface Temperature (SST) from NOAA](https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst). 
+
+
+
 ## Using Data Sets 
 
 > We'll first load some R packages that will allow us to make our code do things like pull in data sets from a folder or make a plot. *R packages* are collections of functions and data sets developed by the community. They improve the existing base fuctionalities of R and expand what you can achieve with your code. 
@@ -33,6 +68,7 @@ library(tidyverse) #these are all different libraries that help the code do diff
 library(readxl)#the blue "library" part tells R that this is a package it should load and the black writing is the name of the specific package(in this case "readxl" which helps us read Excel files into R)
 library(cowplot)
 library(ggplot2)#this library, for example, helps us make plots of our data. 
+
 #notice that because there is a "#" symbol before all of the note text above, it's all just comments that don't affect the code!
 ```
 
@@ -131,8 +167,6 @@ geom_hline(yintercept = -17.7778, linetype = "dashed", color = "maroon") +
 labs(y = "Temperature Anomaly (degrees F) ", x = "Year", title = "Average Global Sea Surface Temperature, 1880–2015") + 
 theme_bw()  
 
-
-#geom_ribbon(aes(ymin=data$lower, ymax=data$upper), linetype=2, alpha=0.1)
 SSTvsYear #prints out our plot
 ```
 
@@ -168,7 +202,7 @@ Answer here:
 ### Paleocene-Eocene Thermal Maximum Sea Surface Temperature
 
 Now, we'll load PETM data of estimated SST (degrees Celsius):
-```{r load PETM data}
+```{r load data}
 PETM_data <- #we are making a new data set called "PETM_data" 
   read_excel("data/FAKE_PETM_SST_data.xlsx") #we are reading in the excel file with our data (which is in the data folder)
 ```
@@ -182,13 +216,14 @@ labs(y = "SST (degrees C)", x = "Age (Ma)", title = "SST (degrees Celcius) vs Ag
 theme_bw() #We make the background grid theme/color black and white 
 SSTvAge
 ```
+If we compare the PETM SST data with the modern NOAA SST data:
 
 ```{r PETM vs Modern SST}
 PETM_vs_modern <- plot_grid(SSTvAge, SSTvsYear, ncol = 2, nrow = 1)
 ```
 
+## Sources: 
 
-# Sources: 
 - McInerney, F. A., & Wing, S. L. (2011). The Paleocene-Eocene Thermal Maximum: a perturbation of carbon cycle, climate, and biosphere with implications for the future. Annual Review of Earth and Planetary Sciences, 39, 489-516.
 - NOAA Global Monitoring Laboratory, Mauna Loa
 - NOAA Extended Reconstructed Sea Surface Temperature (ERSST)
