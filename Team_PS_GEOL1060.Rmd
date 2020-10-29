@@ -31,17 +31,105 @@ But what is a function?
 # The library() function loads each package. You need to do this so R can find the functions you need from a certain package. Once the package loads all the different functions associated with it are usable. 
 library(tidyverse) #these are all different libraries that help the code do different things
 library(readxl)#the blue "library" part tells R that this is a package it should load and the black writing is the name of the specific package(in this case "readxl" which helps us read Excel files into R)
+library(cowplot)
+library(gridExtra)
 library(ggplot2)#this library, for example, helps us make plots of our data. 
 #notice that because there is a "#" symbol before all of the note text above, it's all just comments that don't affect the code!
 ```
 
 ###Modern $CO_2$ Concentration
 
-At Mauna Loa, NOAA has data looking at the parts per million concentration of $CO_2$
+At Mauna Loa, NOAA has data looking at the monthly avergae of the parts per million concentration of $CO_2$ since the 1980s. We will plot this data to see what the trends for $CO_2$ have been in the past 40 years.
 
+First, let's import the Mauna Loa data:
+```{r load Mauna Loa data}
+MaunaLoa_data <-  read_excel("data/co2_monthly_average.xlsx") #here we are reading an excel file that contains our monthly average CO2 data (in ppm) from Mauna Loa. Since our data is in a table, the file will import itself as a data frame called MaunaLoa_data (this is a variable).
+#a data frame in R is a table or a two-dimensional array-like structure in which each column contains values of one variable and each row contains one set of values from each column. 
+
+MaunaLoa_data #this will print out our data frame for us to see and make sure it looks alright. You can see columns year, month, decimal, average, trend. 
+#year tells us the year we are in 
+#month tells the month of a particular year 
+#decimal is the year with a decimal place that represents the month of that year in which you are
+#average shows the monthly mean CO2 ppm values, centered on the middle of each month 
+#trend represents the same as average, after correction for the average seasonal cycle
+
+
+```
+
+Next, let's have you assign a variable in a similar fashion in which we added the Excel data to `MaunaLoa_data`. In this next code chunk, write "parts per million (ppm)" after the `<-` arrow besides our ML_y_title variable. What we are doing here is setting up the y axis title for our plot for the Mauna Loa data.
+
+```{r assign y axis title to a variable}
+ML_y_title <- "parts per million (ppm)"
+```
+
+Congrats! You've assigned a variable. Now let's put it to use in our Mauna Loa plot.
+
+We will use the decimal column for our x axis and the average column for our y. We are using decimal instead of the year or month column so we can see the progression of concentration data through each yea rand the next. 
+
+*What do you think would happen if we use the year or month columns for our plot?*
+
+Answer here: 
+
+```{r plot Mauna Loa data}
+ML_CO2vsYear <- #We create a new plot stored in "ML_CO2vsYear"
+ggplot(MaunaLoa_data, aes(x = decimal, y = average)) + #we call the function ggplot to input our data set and assign x and y variables
+geom_line(size = 0.5, color = 'black')+ #We define a black line to connect our data points
+labs(y = ML_y_title, x = "Year", title = bquote("Atmospheric" ~ CO[2] ~ "at Mauna Loa Observatory")) + #We give our graph labels
+theme_bw() #We make the background grid theme/color black and white 
+
+ML_CO2vsYear #prints out our plot
+```
+We can see a general upwards trend in $CO_2$ concentration. This is due to anthropogenic influence in emissions. Since there is so much fossil fuel consumption, $CO_2$ has increased steadily through the years. In this [link](https://www.esrl.noaa.gov/gmd/ccgg/trends/ff.html) you will see and animation showing the contributions of fossil fuel consumption to atmospheric $CO_2$.
+
+I imagine you have already noticed that the monthly average concentrations of our plot fluctuate up and down.
+
+*Why do you think this causes this?*
+
+Answer here: 
+
+
+```{r plot Mauna Loa data with trend}
+ML_CO2vsYear_wTrend <- #We create a new plot stored in "ML_CO2vsYear"
+ggplot() + #we call the function ggplot to input our data set and assign x and y variables
+geom_line(data = MaunaLoa_data, aes(x = decimal, y = average), size = 0.5, color = 'black')+ #We define a black line to connect our data points 
+geom_line(data = MaunaLoa_data, aes(x = decimal, y = trend), size = 0.5, color = 'red')+ #We add our trend column data in red 
+labs(y = ML_y_title, x = "Year", title = bquote("Atmospheric" ~ CO[2] ~ "at Mauna Loa Observatory")) + #We give our graph labels
+theme_bw() #We make the background grid theme/color black and white 
+
+ML_CO2vsYear_wTrend #prints out our plot
+```
+If we plot the trend column from our `MaunaLoa_data` (seen here as the red line) we can see the monthly ppm average but corrected for the seasonal cycles (ups and downs) you noticed before.
+
+###Modern Sea Surface Temperature
+
+Now let's look at what has been happening to the sea surface temperature given the increasing $CO_2$ concentrations.
+
+Remember that $CO_2$ is a greenhouse gas, which can trap the heat originated from the Earth’s surface.  If there is more $CO_2$ then more heat gets trapped, and if there is less $CO_2$ then less heat gets trapped.  This affects the average temperature of the planet, including seas surface temperature (SST).
+
+Let's load our NOAA SST data and plot it.
+
+```{r load modern SST data}
+ModernSST_data <-  read_excel("data/EPA_SST.xlsx") 
+```
+
+```{r plot modern SST data}
+SSTvsYear <-
+ggplot(ModernSST_data, aes(x = year, y = Annual Anomaly)) + 
+geom_line(size = 0.5, color = 'black') + 
+geom_ribbon(aes(ymin=data$lower, ymax=data$upper)) +
+labs(y = ML_y_title, x = "Year", title = bquote("Atmospheric" ~ CO[2] ~ "at Mauna Loa Observatory")) + #
+theme_bw()  
+
+SSTvsYear #prints out our plot
+```
+
+In the graph above we have plotted 
+
+
+###Paleocene-Eocene Thermal Maximum Sea Surface Temperature
 
 Now, we'll load PETM data of estimated SST (degrees Celsius):
-```{r load data}
+```{r load PETM data}
 PETM_data <- #we are making a new data set called "PETM_data" 
   read_excel("data/FAKE_PETM_SST_data.xlsx") #we are reading in the excel file with our data (which is in the data folder)
 ```
