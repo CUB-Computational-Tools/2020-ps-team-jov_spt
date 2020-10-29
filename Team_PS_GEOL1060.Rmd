@@ -20,7 +20,7 @@ editor_options:
 # ***Ocean Acidification***
 <p>&nbsp;</p>
 
-##Using Data Sets 
+## Using Data Sets 
 
 > We'll first load some R packages that will allow us to make our code do things like pull in data sets from a folder or make a plot. *R packages* are collections of functions and data sets developed by the community. They improve the existing base fuctionalities of R and expand what you can achieve with your code. 
 But what is a function?
@@ -32,12 +32,11 @@ But what is a function?
 library(tidyverse) #these are all different libraries that help the code do different things
 library(readxl)#the blue "library" part tells R that this is a package it should load and the black writing is the name of the specific package(in this case "readxl" which helps us read Excel files into R)
 library(cowplot)
-library(gridExtra)
 library(ggplot2)#this library, for example, helps us make plots of our data. 
 #notice that because there is a "#" symbol before all of the note text above, it's all just comments that don't affect the code!
 ```
 
-###Modern $CO_2$ Concentration
+### Modern $CO_2$ Concentration
 
 At Mauna Loa, NOAA has data looking at the monthly avergae of the parts per million concentration of $CO_2$ since the 1980s. We will plot this data to see what the trends for $CO_2$ have been in the past 40 years.
 
@@ -89,7 +88,7 @@ Answer here:
 
 
 ```{r plot Mauna Loa data with trend}
-ML_CO2vsYear_wTrend <- #We create a new plot stored in "ML_CO2vsYear"
+ML_CO2vsYear_wTrend <- #We create a new plot stored in "ML_CO2vsYear_wTrend"
 ggplot() + #we call the function ggplot to input our data set and assign x and y variables
 geom_line(data = MaunaLoa_data, aes(x = decimal, y = average), size = 0.5, color = 'black')+ #We define a black line to connect our data points 
 geom_line(data = MaunaLoa_data, aes(x = decimal, y = trend), size = 0.5, color = 'red')+ #We add our trend column data in red 
@@ -100,7 +99,7 @@ ML_CO2vsYear_wTrend #prints out our plot
 ```
 If we plot the trend column from our `MaunaLoa_data` (seen here as the red line) we can see the monthly ppm average but corrected for the seasonal cycles (ups and downs) you noticed before.
 
-###Modern Sea Surface Temperature
+### Modern Sea Surface Temperature
 
 Now let's look at what has been happening to the sea surface temperature given the increasing $CO_2$ concentrations.
 
@@ -109,24 +108,64 @@ Remember that $CO_2$ is a greenhouse gas, which can trap the heat originated fro
 Let's load our NOAA SST data and plot it.
 
 ```{r load modern SST data}
-ModernSST_data <-  read_excel("data/EPA_SST.xlsx") 
+ModernSST_data <- read_excel("data/EPA_SST.xlsx") 
+names(ModernSST_data) <- c("year", "anomaly", "lower_95", "higher_95")
+
+fahr_to_cel <- function(temp) {
+  cel <- (temp - 32) * (5 / 9)
+  return(cel)
+}
+
+ModernSST_data$anomaly <- fahr_to_cel(ModernSST_data$anomaly)
+ModernSST_data$lower_95 <- fahr_to_cel(ModernSST_data$lower_95)
+ModernSST_data$higher_95 <- fahr_to_cel(ModernSST_data$higher_95)
+
 ```
 
 ```{r plot modern SST data}
 SSTvsYear <-
-ggplot(ModernSST_data, aes(x = year, y = Annual Anomaly)) + 
+ggplot(ModernSST_data, aes(x = year, y = anomaly)) + 
 geom_line(size = 0.5, color = 'black') + 
-geom_ribbon(aes(ymin=data$lower, ymax=data$upper)) +
-labs(y = ML_y_title, x = "Year", title = bquote("Atmospheric" ~ CO[2] ~ "at Mauna Loa Observatory")) + #
+geom_ribbon(aes(ymin = lower_95, ymax = higher_95), linetype = 2, alpha = 0.3) +
+geom_hline(yintercept = -17.7778, linetype = "dashed", color = "maroon") +
+labs(y = "Temperature Anomaly (degrees F) ", x = "Year", title = "Average Global Sea Surface Temperature, 1880–2015") + 
 theme_bw()  
 
+
+#geom_ribbon(aes(ymin=data$lower, ymax=data$upper), linetype=2, alpha=0.1)
 SSTvsYear #prints out our plot
 ```
 
-In the graph above we have plotted 
+In the graph above we have plotted the average surface temperature change (respect to a 1971 to 2000 average as baseline - shown as dahsed line) of the world’s oceans since 1880. Choosing a different baseline period would not change the shape of the data over time. The gray shade shows the uncertainty of the data, based on the methods used to get the average temperatures and the amount of measurements.
+
+### Comparing the trends in $CO_2$ and SST
+
+Now let's compare the trends our $CO_2$ and SST plots. 
+
+```{r plot modern SST data since 1980}
+new_ModernSST_data <- subset(ModernSST_data, year >= 1980)
+
+newSSTvsYear <-
+ggplot(new_ModernSST_data, aes(x = year, y = anomaly)) + 
+geom_line(size = 0.5, color = 'black') + 
+geom_ribbon(aes(ymin = lower_95, ymax = higher_95), linetype = 2, alpha = 0.3) +
+geom_hline(yintercept = -17.7778, linetype = "dashed", color = "maroon") +
+labs(y = "Temperature Anomaly (degrees F) ", x = "Year", title = "Average Global Sea Surface Temperature, 1980–2015") + 
+theme_bw()  
+
+```
+```{r plot CO2 and SST side by side}
+modern_sideBYside <- plot_grid(ML_CO2vsYear_wTrend, newSSTvsYear, ncol = 2, nrow = 1)
+
+modern_sideBYside
+```
+<p>&nbsp;</p>
+*Do you see a relationship between $CO_2$ and SST? If so, why?*
+
+Answer here: 
 
 
-###Paleocene-Eocene Thermal Maximum Sea Surface Temperature
+### Paleocene-Eocene Thermal Maximum Sea Surface Temperature
 
 Now, we'll load PETM data of estimated SST (degrees Celsius):
 ```{r load PETM data}
@@ -134,7 +173,7 @@ PETM_data <- #we are making a new data set called "PETM_data"
   read_excel("data/FAKE_PETM_SST_data.xlsx") #we are reading in the excel file with our data (which is in the data folder)
 ```
 
-Plot the estimated SST (degrees Celcius) data over time:
+Plot the estimated SST (degrees Celsius) data over time:
 ```{r plot PETM data}
 SSTvAge <- #We create a new plot that's named "SSTvAge"
 ggplot(PETM_data, aes(x = Age, y = SST)) + #we call the function ggplot to input our data set and assign x and y variables
@@ -144,7 +183,12 @@ theme_bw() #We make the background grid theme/color black and white
 SSTvAge
 ```
 
-##Sources: 
+```{r PETM vs Modern SST}
+PETM_vs_modern <- plot_grid(SSTvAge, SSTvsYear, ncol = 2, nrow = 1)
+```
+
+
+# Sources: 
 - McInerney, F. A., & Wing, S. L. (2011). The Paleocene-Eocene Thermal Maximum: a perturbation of carbon cycle, climate, and biosphere with implications for the future. Annual Review of Earth and Planetary Sciences, 39, 489-516.
 - NOAA Global Monitoring Laboratory, Mauna Loa
 - NOAA Extended Reconstructed Sea Surface Temperature (ERSST)
