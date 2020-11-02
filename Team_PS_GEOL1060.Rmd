@@ -45,15 +45,13 @@ Prior to completing this Problem Set, it is expected that students:
 
 As the supplemental readings explained, when levels of carbon dioxide increase in the atmosphere, the chemistry of the oceans change. That atmospheric carbon dioxide mixes with sea water to create carbonic acid. Increased  carbonic acid in the ocean makes the ocean more acidic and contributes to breaking down corals and organism's carbonate shells through a chain of chemical reactions. As more and more $CO_2$ is added into the atmopshere, this process continues to happen and more and more organisms and ecosystems can be negatively affected. 
 
-In modern times, the increase in atmopsheric carbon dioxide has come from the burning of fossil fuels (a lot of buried carbon), but there have been other times in the geologic past when large amounts of carbon dioxide were released into the atmosphere. 
+In modern times, the increase in atmospheric carbon dioxide has come from the burning of fossil fuels (a lot of buried carbon), but there have been other times in the geologic past when large amounts of carbon dioxide were released into the atmosphere (and not by humans!)
 
 ### Paleocene-Eocene Thermal Maximum
-The Paleocene-Eocene Thermal Maximum (PETM) is one of those times. The PETM happened around 55 million years ago (about 10 million years after a big meteroite impact made the dinosaurs go extinct). The PETM was first recognized after deep ocean bedrock cores recorded a big change in the carbon isotope values around this time. Over time, scientists have concluded that this time period (over a few thousand years) experienced high levels of atmospheric carbon dioxide and increased temperatures in the ocean and on land (McInerney & Wing, 2011). Moreover, the PETM triggered mass ectinctions of deep-sea organisms, showing that these drastic changes in carbon dioxide and temperatures could impact the biosphere.
+The Paleocene-Eocene Thermal Maximum (PETM) is one of those times. The PETM happened around 55 million years ago (about 10 million years after a big meteorite impact made the dinosaurs go extinct). The PETM was first recognized after deep ocean bedrock cores recorded a big change in the carbon isotope values around this time (known as a Carbon Isotope Excursion or CIE) that are associated with the earth warming around 4-5°C (for perspective, modern warming since the industrial revolution has been around 1°C). Over time, scientists have concluded that this time period (over a few thousand years) experienced high levels of atmospheric carbon dioxide and increased temperatures in the ocean and on land (McInerney & Wing, 2011). Moreover, the PETM triggered mass extinctions of deep-sea organisms, showing that these drastic changes in carbon dioxide, pH, and temperatures could also impact the biosphere.
 
 ### Modern-Day Carbon Dioxide and Sea Surface Temperature (SST)
 We're going to first investigate data sets that look at the level of carbon dioxide measured in the atmosphere (in parts per million) from the [Global Monitoring Laboratory in Mauna Loa](https://www.esrl.noaa.gov/gmd/ccgg/trends/monthly.html) over time. We'll also be looking at modern data sets for [Sea Surface Temperature (SST) from NOAA](https://www.ncdc.noaa.gov/data-access/marineocean-data/extended-reconstructed-sea-surface-temperature-ersst). 
-
-
 
 ## Using Data Sets 
 
@@ -184,7 +182,7 @@ ggplot(new_ModernSST_data, aes(x = year, y = anomaly)) +
 geom_line(size = 0.5, color = 'black') + 
 geom_ribbon(aes(ymin = lower_95, ymax = higher_95), linetype = 2, alpha = 0.3) +
 geom_hline(yintercept = -17.7778, linetype = "dashed", color = "maroon") +
-labs(y = "Temperature Anomaly (degrees F) ", x = "Year", title = "Average Global Sea Surface Temperature, 1980–2015") + 
+labs(y = "Temperature Anomaly (°F) ", x = "Year", title = "Average Global Sea Surface Temperature, 1980–2015") + 
 theme_bw()  
 
 ```
@@ -199,27 +197,84 @@ modern_sideBYside
 Answer here: 
 
 
-### Paleocene-Eocene Thermal Maximum Sea Surface Temperature
+### Investigating Paleocene-Eocene Thermal Maximum (PETM) carbon dioxide and pH values: 
+Now that we've seen some data from modern values for $CO_2$ and pH, let's look at values estimated for during the PETM. We'll be looking at data from a paper by [Gutjhar et al. (2017)](https://www.nature.com/articles/nature23646#Sec12)
 
-Now, we'll load PETM data of estimated SST (degrees Celsius):
-```{r load data}
-PETM_data <- #we are making a new data set called "PETM_data" 
-  read_excel("data/FAKE_PETM_SST_data.xlsx") #we are reading in the excel file with our data (which is in the data folder)
+We'll first look at ${\delta}^{13}C$ (said "delta carbon 13") which reflects the amount or ratio (${\delta}$) of the heavy isotope (13) of the element Carbon (C). This value is recorded in rocks, meaning it can be preserved and measured to give insight into possible changes in atmospheric carbon dioxide levels from the past. However, ${\delta}^{13}C$ isn't directly equal to $CO_2$. In fact, it's the reverse: more positive values of ${\delta}^{13}C$ are associated with decreased levels of atmospheric $CO_2$ and  more negative values of ${\delta}^{13}C$ are associated with increased levels of atmospheric $CO_2$. Keeping this in mind, let's plot the ${\delta}^{13}C$ for the PETM and see what it looks like. 
+
+Let's first load PETM data for ${\delta}^{13}C$. 
+```{r load PETM d13C data}
+PETM_d13C_data <- #we are making a new data set called "PETM_d13C_data" 
+  read_excel("data/gutjhar_data_d13C.xlsx") #we are reading in the excel file with our data (which is in the data folder)
 ```
 
-Plot the estimated SST (degrees Celsius) data over time:
-```{r plot PETM data}
-SSTvAge <- #We create a new plot that's named "SSTvAge"
-ggplot(PETM_data, aes(x = Age, y = SST)) + #we call the function ggplot to input our data set and assign x and y variables
-geom_line(size = 0.5, color = 'red')+ #We define a red line to connect our data points
-labs(y = "SST (degrees C)", x = "Age (Ma)", title = "SST (degrees Celcius) vs Age (Ma) during the PETM from Stokke et al. (2020)" )+ #We give our graph labels
+Plot the ${\delta}^{13}C$ data compared to age:
+```{r plot PETM d13C data}
+d13CvsAge <- #We create a new plot that's named "d13CvsAge"
+ggplot(PETM_d13C_data, aes(x = Age, y = d13C)) + #we call the function ggplot to input our data set and assign x and y variables
+geom_vline(xintercept = 0, linetype = "dashed", color = "maroon") + #this line of code plots the red dashed line at our 0 Age value
+geom_line()+ #we define a black line to represent the data
+labs(y=expression(delta^13*C~"(\u2030 PDB)"), x = "Age relative to CIE event (kyr)", title = expression(delta^13*C~"(\u2030, PDB) throughout the PETM from Gutjhar et al. (2017)" ))+ #We give our graph labels
 theme_bw() #We make the background grid theme/color black and white 
-SSTvAge
+d13CvsAge
 ```
-If we compare the PETM SST data with the modern NOAA SST data:
+<p>&nbsp;</p>
+If you notice the axes of this plot, the y-axis is ${\delta}^{13}C$ and the x-axis is titled "Age relative to CIE event (kyr)". The x-axis represents the age (negative values) or after (positive values) the Carbon Isotope Excursion (CIE) event in thousands of years (kyr). The Carbon Isotope Excursion event just refers to the BIG CHANGE in the ${\delta}^{13}C$ values that are recorded in these rocks and is now a sort of signature that marks the PETM in rocks all over the world. So, this plot shows values of ${\delta}^{13}C$ relative to thousands of years before or after that CIE event (where the Age is equal to 0).
 
+*About how many thousands of years does it take for the big Carbon Isotope Excursion (CIE) event to occur? Is this change ${\delta}^{13}C$ recording an increase or a decrease in the level of atmospheric carbon dioxide during this time?*
+
+Answer here: 
+
+
+
+Now we'll load and plot PETM data for estimated pH: 
+```{r load PETM pH data}
+PETM_pH_data <- #we are making a new data set called "PETM_pH_data" for the pH data set
+  read_excel("data/gutjhar_data_pH.xlsx") #we are reading in the excel file with our data (which is in the data folder)
+```
+
+```{r plot PETM pH data}
+pHvsAge <- #We create a new plot that's named "pHvsAge"
+ggplot(PETM_pH_data, aes(x = Age, y = pH)) + #we call the function ggplot to input our data set and assign x and y variables
+geom_vline(xintercept = 0, linetype = "dashed", color = "maroon") + #this line of code plots the red dashed line at our 0 Age value
+geom_line(size = 0.5, color = 'black') + #we define a black line to represent the data
+geom_ribbon(aes(ymin = SDmin, ymax = SDmax), linetype = 2, alpha = 0.3) + #this line of code adds the shaded error (max and min values) in the estimated pH values
+labs(y = "pH", x = "Age relative to CIE event (kyr)", title = "Estimated pH throughout the PETM from Gutjhar et al. (2017) ")+ #we include axis labels and a title for the plot
+theme_bw() #this makes the theme of the plot "black and white"
+
+pHvsAge #prints out our plot
+```
+
+<p>&nbsp;</p>
+Did you know that in modern times, the pH of the oceans have decreased by 0.1 on the pH scale. That may not seem like much, but pH is not a direct comparison to the change in how acidic the oceans get. So, a change in pH of 0.1 makes the oceans about 30% more acidic - yikes! 
+
+*What is the estimated change in the pH for the PETM based on the plot above?*
+
+Answer here: 
+
+
+```{r PETM d13C vs pH}
+PETM_d13CvspH <- plot_grid(d13CvsAge, pHvsAge, ncol = 2, nrow = 1) #here we're making a new plot with a special function called "plot_grid" that plots two existing plots next to each other
+PETM_d13CvspH #prints out the plot
+```
+<p>&nbsp;</p>
+*Do you see a relationship between ${\delta}^{13}C$ and pH? If so, why?* 
+
+Answer here: 
+
+
+
+*Based on the plots, how many thousands of years does it take for the values to return to what they were prior to the PETM (or CIE event)?*
+
+
+Answer here: 
+
+
+
+If we compare the PETM pH data with the modern pH data:
 ```{r PETM vs Modern SST}
-PETM_vs_modern <- plot_grid(SSTvAge, SSTvsYear, ncol = 2, nrow = 1)
+PETM_vs_modern <- plot_grid(pHvsAge, pHvsYear, ncol = 2, nrow = 1)
+PETM_vs_modern
 ```
 
 ## Sources: 
@@ -228,6 +283,7 @@ PETM_vs_modern <- plot_grid(SSTvAge, SSTvsYear, ncol = 2, nrow = 1)
 - NOAA Global Monitoring Laboratory, Mauna Loa
 - NOAA Extended Reconstructed Sea Surface Temperature (ERSST)
 - PETM data modified from Stokke, E. W., Jones, M. T., Tierney, J. E., Svensen, H. H., & Whiteside, J. H. (2020). Temperature changes across the Paleocene-Eocene Thermal Maximum–a new high-resolution TEX86 temperature record from the Eastern North Sea Basin. Earth and Planetary Science Letters, 544, 116388.
+-"Earth in the Future" course at Penn State (https://www.e-education.psu.edu/earth103/node/639)
 
 
 
