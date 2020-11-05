@@ -10,8 +10,6 @@ When designing the problem set, be mindful that you are now working together wit
 
 Make sure to test your problem set on binder to make sure it will be possible to use in a classroom context. For this, adjust/delete the example links below to fit the language(s) and platforms you are using. Make sure to replace all instances of the word `2020-ps-team-jov_spt` (the name of the template repo) with the name of your own repository.
 
-<a href='https://mybinder.org/v2/gh/CUB-Computational-Tools/2020-ps-team-jov_spt/binder-R?urlpath=git-pull?repo=https%3A%2F%2Fgithub.com%2FCUB-Computational-Tools%2F2020-ps-team-jov_spt%26branch%3Dmaster%26urlpath%3Drstudio'><img src='https://img.shields.io/badge/launch%20final-R+RStudio-blue.svg'/></a>
-
 <a href='https://mybinder.org/v2/gh/CUB-Computational-Tools/assignment_group_problem_set/binder-R?urlpath=git-pull?repo=https%3A%2F%2Fgithub.com%2FCUB-Computational-Tools%2Fassignment_group_problem_set%26branch%3Dmaster%26urlpath%3Dlab'><img src='https://img.shields.io/badge/launch%20final-R+Jupyter%20Lab-orange.svg'/></a>
 
 
