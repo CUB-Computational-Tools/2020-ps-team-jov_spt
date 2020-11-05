@@ -1,6 +1,7 @@
 # Regular packages
 install.packages(c("rmarkdown", "caTools", "bitops")) # for knitting
 install.packages("tidyverse") # for all tidyverse functionality
+install.packages(c("cowplot", "readxl", "ggplot2")) # for gridding plots, reading xlsx files, plotting graphs, respectively
 
 # Bioconductor packages
 # install.packages("BiocManager")
