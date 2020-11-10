@@ -1,3 +1,3 @@
 # data
 
-This directory should hold data files for your problem sets.
+This directory holds the data files for the ocean acidification lesson. 
