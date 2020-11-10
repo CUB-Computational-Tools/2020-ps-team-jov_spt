@@ -1,18 +1,17 @@
-# Team Problem Set
+# GEOL 1060 - Ocean Acidification
 
-This is the repository for designing the team problem set. It contains the same binder setup branches and notebook templates as the repo for your individual problem sets and you can use any of them as you see fit.
+This is the repository for the ocean acidification lesson for the GEOL 1060 course. Here you will find two Jupyter Notebooks, one for part 1 of the lesson, and one for part 2 of the lesson. Part 1 will focus on ocean acidification in modern oceans and an introduction to R programming and Jupyter Notebook. Part 2 will focus on a case study on ocean acidification called the Paleocene-Eocene Thermal Maximum.
 
-# Designing the problem set
+# Jupyter Notebook
 
-When designing the problem set, be mindful that you are now working together with multiple people and it is especially important to work in branches, push your changes regularly to GitHub and merge branches regularly into the master branch. If you are working in Jupyter, make sure to clear all output **before** committing changes to git.
+Click on either the purple or orange buttons below to access the Jupyter Notebook for part 1 or part 2 of the ocean acidification lesson, respectively.
 
-# Testing
+<a href='https://mybinder.org/v2/gh/CUB-Computational-Tools/2020-ps-team-jov_spt/binder-R?urlpath=git-pull?repo=https%3A%2F%2Fgithub.com%2FCUB-Computational-Tools%2F2020-ps-team-jov_spt%26branch%3Dmaster%26urlpath%3Dtree%2F2020-ps-team-jov_spt%2FOceanAcidification_Part1.ipynb'><img src='https://img.shields.io/badge/take%20me%20to-Ocean%20Acidification%20Part%201-purple.svg'/></a>
 
-Make sure to test your problem set on binder to make sure it will be possible to use in a classroom context. For this, adjust/delete the example links below to fit the language(s) and platforms you are using. Make sure to replace all instances of the word `2020-ps-team-jov_spt` (the name of the template repo) with the name of your own repository.
+<a href='https://mybinder.org/v2/gh/CUB-Computational-Tools/2020-ps-team-jov_spt/binder-R?urlpath=git-pull?repo=https%3A%2F%2Fgithub.com%2FCUB-Computational-Tools%2F2020-ps-team-jov_spt%26branch%3Dmaster%26urlpath%3Dtree%2F2020-ps-team-jov_spt%2FOceanAcidification_Part2.ipynb'><img src='https://img.shields.io/badge/take%20me%20to-Ocean%20Acidification%20Part%202-orange.svg'/></a>
 
-<a href='https://mybinder.org/v2/gh/CUB-Computational-Tools/assignment_group_problem_set/binder-R?urlpath=git-pull?repo=https%3A%2F%2Fgithub.com%2FCUB-Computational-Tools%2Fassignment_group_problem_set%26branch%3Dmaster%26urlpath%3Dlab'><img src='https://img.shields.io/badge/launch%20final-R+Jupyter%20Lab-orange.svg'/></a>
+# Jupyter Lab Access
 
+To access all of the ocean acidification lesson's files click on the button below. This button will launch a Jupyter Lab environment that will let you interact with all the files in this repository. This button is meant for instructors using this lesson.
 
-# Cleanup
-
-Generally, it is good to clean up the repo once ready for student usage by deleting all unused files in the master branch. None of the files initially in the master branch (examples and blank templates from the template repo) are necessary and all can be deleted (although keeping the `.gitignore` is generally a good idea).
+<a href='https://mybinder.org/v2/gh/CUB-Computational-Tools/2020-ps-team-jov_spt/binder-R?urlpath=git-pull?repo=https%3A%2F%2Fgithub.com%2FCUB-Computational-Tools%2F2020-ps-team-jov_spt%26branch%3Dmaster%26urlpath%3Dlab'><img src='https://img.shields.io/badge/launch%20Jupyter%20Lab-Ocean%20Acidification%20Lesson-blue.svg'/></a>
