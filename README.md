@@ -1,6 +1,6 @@
 # GEOL 1060 - Ocean Acidification
 
-This is the repository for the ocean acidification lesson for the GEOL 1060 course. Here you will find two Jupyter Notebooks, one for part 1 of the lesson, and one for part 2 of the lesson. Part 1 will focus on ocean acidification in modern oceans and an introduction to R programming and Jupyter Notebook. Part 2 will focus on a case study on ocean acidification called the Paleocene-Eocene Thermal Maximum.
+This is the repository for the ocean acidification lesson for the GEOL 1060 course. Here you will find two Jupyter Notebooks, one for part 1 of the lesson, and one for part 2 of the lesson. Part 1 will focus on ocean acidification in modern oceans and an introduction to R programming and Jupyter Notebook. Part 2 will focus on a case study on ocean acidification during the Paleocene-Eocene Thermal Maximum.
 
 # Jupyter Notebook
 
